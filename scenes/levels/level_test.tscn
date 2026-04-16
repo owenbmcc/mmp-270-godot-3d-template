@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://c0gg1wmgr1v1k"]
+
+[ext_resource type="Script" uid="uid://diwxvsoi44286" path="res://scripts/game_manager.gd" id="1_4lw2e"]
+[ext_resource type="PackedScene" uid="uid://b0xp6x22rl35o" path="res://scenes/components/player.tscn" id="1_jp5fc"]
+[ext_resource type="Script" uid="uid://cqee8rsaemqyy" path="res://scripts/platforms.gd" id="2_4ptlp"]
+[ext_resource type="Material" uid="uid://d8ndiexb7kon" path="res://materials/gray_check.tres" id="3_ycf23"]
+[ext_resource type="PackedScene" uid="uid://nwhd6ikf0hyk" path="res://scenes/components/player_catcher.tscn" id="4_4ptlp"]
+[ext_resource type="PackedScene" uid="uid://b2uolmcp3nbmb" path="res://scenes/components/enemy.tscn" id="5_uh3ll"]
+[ext_resource type="PackedScene" uid="uid://doi2iiyaeo70s" path="res://scenes/components/collectible.tscn" id="5_ycf23"]
+[ext_resource type="Script" uid="uid://bhifstruwfwbj" path="res://scripts/enemy_nav.gd" id="7_bqmi1"]
+[ext_resource type="PackedScene" uid="uid://duf0rbj8qw0b1" path="res://scenes/components/hud.tscn" id="9_8883n"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6iamk"]
+size = Vector3(6, 1, 5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nsrm0"]
+data = PackedVector3Array(-3, 0.5, 2.5, 3, 0.5, 2.5, -3, -0.5, 2.5, 3, 0.5, 2.5, 3, -0.5, 2.5, -3, -0.5, 2.5, 3, 0.5, -2.5, -3, 0.5, -2.5, 3, -0.5, -2.5, -3, 0.5, -2.5, -3, -0.5, -2.5, 3, -0.5, -2.5, 3, 0.5, 2.5, 3, 0.5, -2.5, 3, -0.5, 2.5, 3, 0.5, -2.5, 3, -0.5, -2.5, 3, -0.5, 2.5, -3, 0.5, -2.5, -3, 0.5, 2.5, -3, -0.5, -2.5, -3, 0.5, 2.5, -3, -0.5, 2.5, -3, -0.5, -2.5, 3, 0.5, 2.5, -3, 0.5, 2.5, 3, 0.5, -2.5, -3, 0.5, 2.5, -3, 0.5, -2.5, 3, 0.5, -2.5, -3, -0.5, 2.5, 3, -0.5, 2.5, -3, -0.5, -2.5, 3, -0.5, 2.5, 3, -0.5, -2.5, -3, -0.5, -2.5)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_8883n"]
+vertices = PackedVector3Array(-2.5, 3.5, 38, -2.5, 3.5, 47, 2.5, 3.5, 47, 2.5, 3.5, 38)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ycf23"]
+size = Vector3(6, 1, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ycf23"]
+data = PackedVector3Array(-3, 0.5, 5, 3, 0.5, 5, -3, -0.5, 5, 3, 0.5, 5, 3, -0.5, 5, -3, -0.5, 5, 3, 0.5, -5, -3, 0.5, -5, 3, -0.5, -5, -3, 0.5, -5, -3, -0.5, -5, 3, -0.5, -5, 3, 0.5, 5, 3, 0.5, -5, 3, -0.5, 5, 3, 0.5, -5, 3, -0.5, -5, 3, -0.5, 5, -3, 0.5, -5, -3, 0.5, 5, -3, -0.5, -5, -3, 0.5, 5, -3, -0.5, 5, -3, -0.5, -5, 3, 0.5, 5, -3, 0.5, 5, 3, 0.5, -5, -3, 0.5, 5, -3, 0.5, -5, 3, 0.5, -5, -3, -0.5, 5, 3, -0.5, 5, -3, -0.5, -5, 3, -0.5, 5, 3, -0.5, -5, -3, -0.5, -5)
+
+[node name="level 1" type="Node" unique_id=82280839]
+
+[node name="hud" parent="." unique_id=1073211851 instance=ExtResource("9_8883n")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=606309815]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="game manager" type="Node" parent="." unique_id=1799346530]
+script = ExtResource("1_4lw2e")
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=2077752884]
+transform = Transform3D(-0.8660254, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660254, 0, 0, 0)
+
+[node name="player catcher" parent="." unique_id=1898607206 node_paths=PackedStringArray("respawn_point") instance=ExtResource("4_4ptlp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0)
+respawn_point = NodePath("../Marker3D")
+
+[node name="Player" parent="." unique_id=954951902 instance=ExtResource("1_jp5fc")]
+transform = Transform3D(-1, 0, 1.1920929e-07, 0, 1, 0, -1.1920929e-07, 0, -1, 0, 0, 0)
+
+[node name="platforms" type="Node" parent="." unique_id=283093648]
+script = ExtResource("2_4ptlp")
+
+[node name="platform1" type="MeshInstance3D" parent="platforms" unique_id=1871664221]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("3_ycf23")
+mesh = SubResource("BoxMesh_6iamk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="platforms/platform1" unique_id=288274158]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platforms/platform1/StaticBody3D" unique_id=2136339538]
+shape = SubResource("ConcavePolygonShape3D_nsrm0")
+
+[node name="platform2" type="MeshInstance3D" parent="platforms" unique_id=2110813984]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 8)
+material_override = ExtResource("3_ycf23")
+mesh = SubResource("BoxMesh_6iamk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="platforms/platform2" unique_id=2064671953]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platforms/platform2/StaticBody3D" unique_id=233868834]
+shape = SubResource("ConcavePolygonShape3D_nsrm0")
+
+[node name="platform3" type="MeshInstance3D" parent="platforms" unique_id=745096666]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 16.5)
+material_override = ExtResource("3_ycf23")
+mesh = SubResource("BoxMesh_6iamk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="platforms/platform3" unique_id=1870191249]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platforms/platform3/StaticBody3D" unique_id=2109114301]
+shape = SubResource("ConcavePolygonShape3D_nsrm0")
+
+[node name="platform4" type="MeshInstance3D" parent="platforms" unique_id=603124520]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 23.5)
+material_override = ExtResource("3_ycf23")
+mesh = SubResource("BoxMesh_6iamk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="platforms/platform4" unique_id=1244934485]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platforms/platform4/StaticBody3D" unique_id=509163088]
+shape = SubResource("ConcavePolygonShape3D_nsrm0")
+
+[node name="platform5" type="MeshInstance3D" parent="platforms" unique_id=1344640892]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 31.5)
+material_override = ExtResource("3_ycf23")
+mesh = SubResource("BoxMesh_6iamk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="platforms/platform5" unique_id=1597597251]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platforms/platform5/StaticBody3D" unique_id=1450366202]
+shape = SubResource("ConcavePolygonShape3D_nsrm0")
+
+[node name="items" type="Node" parent="." unique_id=1801252701]
+
+[node name="collectible" parent="items" unique_id=24986374 instance=ExtResource("5_ycf23")]
+transform = Transform3D(-0.99999994, 0, 0, 0, 1, 0, 0, 0, -0.99999994, 0, 1.5, 16.5)
+
+[node name="collectible2" parent="items" unique_id=2080664826 instance=ExtResource("5_ycf23")]
+transform = Transform3D(-0.99999994, 0, 0, 0, 1, 0, 0, 0, -0.99999994, 0, 2, 23.5)
+
+[node name="collectible3" parent="items" unique_id=1015688060 instance=ExtResource("5_ycf23")]
+transform = Transform3D(-0.99999994, 0, 0, 0, 1, 0, 0, 0, -0.99999994, 0, 3, 31.5)
+
+[node name="enemy platform" type="Node" parent="." unique_id=1304505942]
+script = ExtResource("2_4ptlp")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="enemy platform" unique_id=742574620 node_paths=PackedStringArray("player")]
+navigation_mesh = SubResource("NavigationMesh_8883n")
+script = ExtResource("7_bqmi1")
+player = NodePath("../../Player")
+
+[node name="platform6" type="MeshInstance3D" parent="enemy platform/NavigationRegion3D" unique_id=1004571271]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 42.5)
+material_override = ExtResource("3_ycf23")
+mesh = SubResource("BoxMesh_ycf23")
+skeleton = NodePath("../../../platforms")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="enemy platform/NavigationRegion3D/platform6" unique_id=130837898]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemy platform/NavigationRegion3D/platform6/StaticBody3D" unique_id=1304215559]
+shape = SubResource("ConcavePolygonShape3D_ycf23")
+
+[node name="enemies" type="Node" parent="." unique_id=681015640]
+
+[node name="enemy" parent="enemies" unique_id=1956923580 node_paths=PackedStringArray("patrol_locations") instance=ExtResource("5_uh3ll")]
+transform = Transform3D(-1, 0, 5.9604645e-08, 0, 1, 0, -5.9604645e-08, 0, -1, 0, 3, 46.5)
+patrol_locations = [NodePath("../patrol/Marker3D"), NodePath("../patrol/Marker3D2")]
+
+[node name="patrol" type="Node" parent="enemies" unique_id=1648093279]
+
+[node name="Marker3D" type="Marker3D" parent="enemies/patrol" unique_id=874007305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 39)
+
+[node name="Marker3D2" type="Marker3D" parent="enemies/patrol" unique_id=1940567711]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 46.5)
+
+[connection signal="item_collected" from="items/collectible" to="hud" method="_on_collected"]
+[connection signal="enemy_attack" from="enemies/enemy" to="game manager" method="restart_level"]

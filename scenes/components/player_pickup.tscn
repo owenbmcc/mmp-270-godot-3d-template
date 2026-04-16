@@ -1,29 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://cyq5q0qm3yvul"]
+[gd_scene format=3 uid="uid://cyq5q0qm3yvul"]
 
 [ext_resource type="Script" uid="uid://bo5pq3jx0g4dp" path="res://scripts/pickup.gd" id="1_6klky"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j235a"]
 size = Vector3(1.8374, 2.09253, 1.35449)
 
-[node name="PlayerPickup" type="Node3D"]
+[node name="player_pickup" type="Node3D" unique_id=325116711]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0154476, 0)
 script = ExtResource("1_6klky")
 
-[node name="Hand" type="Marker3D" parent="."]
+[node name="hand" type="Marker3D" parent="." unique_id=478515469]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.700257, -0.601449, -2.08917)
 
-[node name="PickupArea" type="Area3D" parent="."]
+[node name="pickup_area" type="Area3D" parent="." unique_id=265038637]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.17063, -1.123)
 collision_layer = 16
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pickup_area" unique_id=596319780]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0390625, 0.217651, -0.177246)
 shape = SubResource("BoxShape3D_j235a")
 
-[node name="PickupSound" type="AudioStreamPlayer3D" parent="."]
+[node name="pickup_sound" type="AudioStreamPlayer3D" parent="." unique_id=234788317]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.682056, -0.730979, -1.91944)
 volume_db = -18.0
 
-[node name="ThrowSound" type="AudioStreamPlayer3D" parent="."]
+[node name="throw_sound" type="AudioStreamPlayer3D" parent="." unique_id=1172815615]
 transform = Transform3D(0.99979, 0, -0.0204713, 0, 1, 0, 0.0204713, 0, 0.99979, 0.92782, -0.679963, -1.71128)

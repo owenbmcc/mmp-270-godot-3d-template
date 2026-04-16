@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://nwhd6ikf0hyk"]
+
+[ext_resource type="Script" uid="uid://cgwi5p87w83x4" path="res://scripts/respawn_player.gd" id="1_2wo2x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q7kn3"]
+size = Vector3(1000, 10, 1000)
+
+[node name="player_catcher" type="Area3D" unique_id=1241410706]
+collision_layer = 2
+script = ExtResource("1_2wo2x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=943211464]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+shape = SubResource("BoxShape3D_q7kn3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

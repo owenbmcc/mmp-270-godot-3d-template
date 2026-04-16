@@ -14,3 +14,4 @@ extends Area3D
 # if player enters, reset position to respawn point
 func _on_body_entered(body):
 	body.position = respawn_point.position
+	body.rotation = respawn_point.rotation

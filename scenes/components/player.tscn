@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0xp6x22rl35o"]
+[gd_scene format=3 uid="uid://b0xp6x22rl35o"]
 
 [ext_resource type="Script" uid="uid://cw3ohpsaq6o46" path="res://scripts/fps_controller.gd" id="1_qtton"]
 
@@ -6,31 +6,31 @@
 
 [sub_resource type="CapsuleShape3D" id="2"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="player" type="CharacterBody3D" unique_id=118054129]
 collision_mask = 2126
 script = ExtResource("1_qtton")
 
-[node name="MeshInstance" type="MeshInstance3D" parent="."]
+[node name="MeshInstance" type="MeshInstance3D" parent="." unique_id=196262847]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0088675, 0)
 visible = false
 mesh = SubResource("1")
 
-[node name="CollisionShape" type="CollisionShape3D" parent="."]
+[node name="CollisionShape" type="CollisionShape3D" parent="." unique_id=202648366]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0088675, 0)
 shape = SubResource("2")
 
-[node name="Camera" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=828637883]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.1088674, 2.08165e-12)
 current = true
 
-[node name="JumpSound" type="AudioStreamPlayer3D" parent="."]
+[node name="jump_sound" type="AudioStreamPlayer3D" parent="." unique_id=583639373]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.019315481, 0)
 volume_db = -12.0
 
-[node name="FootstepSound" type="AudioStreamPlayer3D" parent="."]
+[node name="footstep_sound" type="AudioStreamPlayer3D" parent="." unique_id=851143037]
 transform = Transform3D(0.99979043, 0, -0.02047131, 0, 1, 0, 0.02047131, 0, 0.99979043, 0.92782, 1.4289045, -1.71128)
 volume_db = -18.0
 
-[node name="FootstepTimer" type="Timer" parent="."]
+[node name="footstep_timer" type="Timer" parent="." unique_id=1639405586]
 wait_time = 0.3
 one_shot = true

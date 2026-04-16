@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://duf0rbj8qw0b1"]
+
+[ext_resource type="Script" uid="uid://bu1w54lva0yxy" path="res://scripts/hud.gd" id="1_1npay"]
+[ext_resource type="Texture2D" uid="uid://cvba8ekmrl06k" path="res://textures/apple20.png" id="2_53nqi"]
+
+[node name="hud" type="Control" unique_id=1073211851 node_paths=PackedStringArray("console", "item_counter")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1npay")
+console = NodePath("CenterContainer/console")
+item_counter = NodePath("HBoxContainer/coin_counter")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=792498624]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=254777835]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_53nqi")
+
+[node name="coin_counter" type="Label" parent="HBoxContainer" unique_id=1145335278]
+layout_mode = 2
+text = "0"
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer" unique_id=1423196337]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_53nqi")
+
+[node name="lives_counter" type="Label" parent="HBoxContainer" unique_id=395539323]
+layout_mode = 2
+text = "0"
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1383678496]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="console" type="Label" parent="CenterContainer" unique_id=1419060909]
+layout_mode = 2
+text = "console"

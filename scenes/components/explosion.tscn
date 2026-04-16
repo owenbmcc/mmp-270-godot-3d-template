@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dxk7d8g1efv6s"]
+
+[ext_resource type="Script" uid="uid://b7xpr2mogi0y4" path="res://scripts/enemy_explosion.gd" id="1_fq13p"]
+
+[sub_resource type="Gradient" id="Gradient_va302"]
+offsets = PackedFloat32Array(0, 0.085185185, 0.8, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.21810699, 0.21810699, 0.21810699, 1, 0.44444445, 0.44444445, 0.44444445, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fq13p"]
+gradient = SubResource("Gradient_va302")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_va302"]
+lifetime_randomness = 0.2
+emission_shape_scale = Vector3(2, 2, 2)
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+angular_velocity_min = -120.72002
+angular_velocity_max = 133.64998
+orbit_velocity_min = -0.3589999
+orbit_velocity_max = 0.3830001
+linear_accel_min = -2.2351742e-06
+linear_accel_max = 23.349997
+damping_max = 17.665
+scale_over_velocity_max = 1000.0
+color = Color(1, 1, 0, 1)
+color_ramp = SubResource("GradientTexture1D_fq13p")
+hue_variation_min = -0.43
+hue_variation_max = 0.53
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_va302"]
+albedo_color = Color(1, 0.85490197, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_va302"]
+material = SubResource("StandardMaterial3D_va302")
+size = Vector3(0.25, 0.25, 0.25)
+
+[node name="explosion" type="Node3D" unique_id=730440044]
+script = ExtResource("1_fq13p")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=494856705]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, -1.7484555e-07, 1.5285484e-14, -1.7484555e-07, 1, 0, 0, 0)
+emitting = false
+amount = 128
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_va302")
+draw_pass_1 = SubResource("BoxMesh_va302")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=2008794977]

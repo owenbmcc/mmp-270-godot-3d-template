@@ -6,15 +6,18 @@ extends CharacterBody3D
 ## • CollisionShape3D
 ## • Mesh/Visual
 ## • $NavigationAgent3D
-## • Area3D ($PlayerDetector)
+## • Area3D ($player_detector)
 ## [player detector] {player}
 ## -> body_entered -> _on_player_detector_body_entered (self)
-## • Area3D ($HitBox)
+## • Area3D ($player_attack)
+## [player attack] {player}
+## -> body_entered -> _on_player_attack_body_entered (self)
+## • Area3D ($hit_box)
 ## [enemy hit box] {player, pickables} (or anything that can kill enemy)
 ## -> body_entered -> _on_hit_box_body_entered (self)
 ## ~ $AnimationPlayer ("idle", "walk", "follow", "attack")
-## ~ AudioStreamPlayer3D ($DetectSound)
-## ~ AudioStreamPlayer3D ($AttackSound)
+## ~ AudioStreamPlayer3D ($detect_sound)
+## ~ AudioStreamPlayer3D ($attack_sound)
 ## ~ PackedScene (Explosion)
 ## 
 ## requires patrol locations, separate node structure
@@ -27,6 +30,8 @@ extends CharacterBody3D
 @onready var nav_agent = $NavigationAgent3D
 @export var speed : float = 3
 @export var patrol_locations : Array[Marker3D]
+@export var patrol_distance : float = 1.5
+@export var attack_distance : float = 2.0
 @export var character_node : Node3D
 @export var explosion : PackedScene
 
@@ -35,10 +40,13 @@ signal enemy_attack
 var patrol_index : int = 0
 var wait_frame : bool = true
 var is_following_player : bool = false
+var is_patrolling : bool = true
 
 var animation_player : AnimationPlayer
 
 func _ready():
+	if patrol_locations.size() == 0:
+		is_patrolling = false
 	set_patrol_location()
 	if character_node:
 		animation_player = character_node.find_child("AnimationPlayer")
@@ -46,6 +54,8 @@ func _ready():
 			animation_player.play("walk")
 
 func set_patrol_location() -> void:
+	if not is_patrolling:
+		return
 	var location = patrol_locations[patrol_index].global_position
 	nav_agent.set_target_position(location)
 
@@ -56,7 +66,7 @@ func _physics_process(_delta) -> void:
 		return
 	
 	# if enemy gets close to patrol target, set the next target
-	if nav_agent.distance_to_target() < 1.5 and not is_following_player:
+	if nav_agent.distance_to_target() < patrol_distance and not is_following_player:
 		patrol_index = patrol_index + 1
 		if patrol_index >= patrol_locations.size():
 			patrol_index = 0
@@ -64,12 +74,11 @@ func _physics_process(_delta) -> void:
 		return
 	
 	# enemy attacks player
-	if nav_agent.distance_to_target() < 2 and is_following_player:
-		emit_signal("enemy_attack")
+	if nav_agent.distance_to_target() < attack_distance and is_following_player:
 		if animation_player:
 			animation_player.play("follow")
-		if $AttackSound:
-			$AttackSound.play()
+		if $attack_sound:
+			$attack_sound.play()
 		return
 	
 	var current_location = global_transform.origin
@@ -91,8 +100,8 @@ func _on_player_detector_body_entered(_body) -> void:
 	is_following_player = true
 	if animation_player:
 		animation_player.play("follow")
-	if $DetectSound:
-		$DetectSound.play()
+	if $detect_sound:
+		$detect_sound.play()
 
 # player leaves detection area
 func _on_player_detector_body_exited(_body) -> void:
@@ -108,3 +117,7 @@ func _on_hit_box_body_entered(_body):
 		e.position = position # sets particle system to position of enemy
 		get_tree().current_scene.add_child(e)
 	queue_free()
+
+
+func _on_player_attack_body_entered(body: Node3D) -> void:
+	call_deferred("emit_signal", "enemy_attack")

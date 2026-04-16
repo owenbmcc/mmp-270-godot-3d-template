@@ -4,13 +4,13 @@ extends Node3D
 ## add camera to camera export
 ## needs player editable children to connect signal to hud
 ## 
-## • Node3D (PlayerPickup) # pickup.gd
-## 	• Marker3D (Hand)
-## 	• Area3D (PickupArea)
+## • Node3D (player_pickup) # pickup.gd
+## 	• Marker3D (hand)
+## 	• Area3D (pickup_area)
 ## 		[pickup detector] {pickables}
 ## 	• CollisionShape3D
-## 	• AudioStreamPlayer3D ($PickupSound)
-## 	• AudioStreamPlayer3D ($ThrowSound)
+## 	• AudioStreamPlayer3D ($pickup_sound)
+## 	• AudioStreamPlayer3D ($throw_sound)
 ## 
 ## fps_controller uses inputs: throw, pickup
 ## Defined in Project > Project Settings > Input Map
@@ -22,8 +22,8 @@ extends Node3D
 ## 	• Mesh/Visual
 
 @export var camera : Camera3D
-@onready var hand = $Hand
-@onready var pickup_area : Area3D = $PickupArea
+@onready var hand = $hand
+@onready var pickup_area : Area3D = $pickup_area
 
 var pull_speed = 2
 var throw_speed = 8
@@ -79,8 +79,8 @@ func _unhandled_input(_event):
 			else:
 				# pick up object
 				is_picked = true
-				if $PickupSound:
-					$PickupSound.play()
+				if $pickup_sound:
+					$pickup_sound.play()
 	
 	# detect user clicked throw
 	if Input.is_action_just_pressed("throw") and pickup_object and is_picked:
@@ -96,8 +96,8 @@ func _unhandled_input(_event):
 		# remove object
 		pickup_object = null
 		is_picked = false
-		if $ThrowSound:
-			$ThrowSound.play()
+		if $throw_sound:
+			$throw_sound.play()
 
 func _on_body_entered(body):
 	# first check if an object is picked up

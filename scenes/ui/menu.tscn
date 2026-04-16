@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://s17k0gy5v185"]
 
 [ext_resource type="Script" uid="uid://bc580nkc7t10o" path="res://scripts/menu.gd" id="1_ekxnf"]
-[ext_resource type="Texture2D" uid="uid://cgeorxlen2gw8" path="res://icon.png" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://cahisq2cj03fp" path="res://icon.png" id="1_l6cm7"]
 
 [node name="menu" type="Control" unique_id=815631053]
 layout_mode = 3
@@ -11,7 +11,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ekxnf")
-start_level_scene = "uid://b4na4mujl2ot2"
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=683037572]
 layout_mode = 1

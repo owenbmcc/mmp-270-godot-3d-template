@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://b2uolmcp3nbmb"]
+
+[ext_resource type="Script" uid="uid://qongqfhyx52p" path="res://scripts/enemy.gd" id="1_by0rb"]
+[ext_resource type="PackedScene" uid="uid://dxk7d8g1efv6s" path="res://scenes/components/explosion.tscn" id="2_qeh0h"]
+[ext_resource type="Material" uid="uid://cx1i646yip0ur" path="res://materials/blue_grid.tres" id="3_acpxt"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uybju"]
+radius = 1.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_uybju"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="TextMesh" id="TextMesh_fy7jn"]
+text = "enemy
+"
+font_size = 64
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7gw26"]
+size = Vector3(3, 6.5, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fy7jn"]
+size = Vector3(1, 1, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o8iwo"]
+size = Vector3(1, 1, 1.5)
+
+[node name="enemy" type="CharacterBody3D" unique_id=1070815422 groups=["enemies"]]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_by0rb")
+explosion = ExtResource("2_qeh0h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1215912618]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.5, 0)
+shape = SubResource("SphereShape3D_uybju")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1756589291]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -5.9604645e-08, 1.5, 0.5)
+material_override = ExtResource("3_acpxt")
+mesh = SubResource("PrismMesh_uybju")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1390700736]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+material_override = ExtResource("3_acpxt")
+mesh = SubResource("TextMesh_fy7jn")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=302362557]
+
+[node name="player_detector" type="Area3D" parent="." unique_id=764549749]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4.5)
+collision_layer = 64
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player_detector" unique_id=1841130420]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_7gw26")
+
+[node name="player_attack" type="Area3D" parent="." unique_id=531942213]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4.5)
+collision_layer = 128
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player_attack" unique_id=575698952]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.5, -2.75)
+shape = SubResource("BoxShape3D_fy7jn")
+
+[node name="hit_box" type="Area3D" parent="." unique_id=950150548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0.10000038)
+collision_layer = 256
+collision_mask = 9
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hit_box" unique_id=2030782147]
+shape = SubResource("BoxShape3D_o8iwo")
+
+[node name="detect_sound" type="AudioStreamPlayer3D" parent="." unique_id=300989288]
+
+[node name="attack_sound" type="AudioStreamPlayer3D" parent="." unique_id=963322925]
+
+[connection signal="body_entered" from="player_detector" to="." method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="player_detector" to="." method="_on_player_detector_body_exited"]
+[connection signal="body_entered" from="player_attack" to="." method="_on_player_attack_body_entered"]
+[connection signal="body_entered" from="hit_box" to="." method="_on_hit_box_body_entered"]
