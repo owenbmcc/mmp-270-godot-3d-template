@@ -1,4 +1,4 @@
-MMP 271 starter template for 3d game
+Starter template for 3d game
 
 Fork from GitHub, or download code zip
 
