@@ -1,230 +1,13 @@
 [gd_scene format=3 uid="uid://doi2iiyaeo70s"]
 
-[ext_resource type="Script" uid="uid://bfe5qywr0bved" path="res://scripts/collectible.gd" id="1_g2c4f"]
+[ext_resource type="Script" uid="uid://d12wwh2wasfbw" path="res://scripts/collectible.gd" id="1_g2c4f"]
 [ext_resource type="Material" uid="uid://chkfp1mmjeiau" path="res://materials/green_grid.tres" id="2_722df"]
-[ext_resource type="AudioStream" uid="uid://b3h5li2l1wui1" path="res://audio/checkpoint.wav" id="3_q0plp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6jtmm"]
 size = Vector3(0.7468262, 0.5673828, 0.20812988)
 
-[sub_resource type="TextMesh" id="TextMesh_s1mjn"]
-text = "item"
-font_size = 32
-
-[sub_resource type="Animation" id="Animation_axmx8"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:rotation:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(2),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3D:rotation:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(2),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MeshInstance3D:rotation:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(2),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MeshInstance3D:position:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(2),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("MeshInstance3D:position:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(2),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MeshInstance3D:position:z")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(2),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="Animation" id="Animation_1n3al"]
-resource_name = "activated"
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2, 2),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.083333336, 0, 0, 0, 0, -0.016666671, 0, 0, 0, 0, -0.016666662, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.5, 0.6, 0.7)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3D:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2, 2),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1.5, -0.083333336, -0.25, 0, 0, 1, -0.016666671, 0.08333334, 0, 0, 1.5, -0.016666662, -0.08333334, 0, 0),
-"times": PackedFloat32Array(0, 0.5, 0.6, 0.7)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MeshInstance3D:position:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2, 2),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.083333336, 0, 0, 0, 0, -0.016666671, 0, 0, 0, 0, -0.016666662, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.5, 0.6, 0.7)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MeshInstance3D:rotation:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(2, 2, 2, 2, 2, 2),
-"points": PackedFloat32Array(0, 0, 0, 0.116286084, 0, 0, -0.116286084, 0, 0.0003805856, 0, 1.5707964, -0.11666667, 0, 0, 0, 0, -9.40462e-05, 0.0004924247, 0.049905956, -0.26130697, 0.0017453292, -0.049836896, 0, 6.906192e-05, 0, 0, -6.906192e-05, 0.00029088825, 0, 0),
-"times": PackedFloat32Array(0, 0.6977165, 0.7, 0.70056427, 0.9995856, 1)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("MeshInstance3D:rotation:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(2, 2, 2, 2, 2, 2),
-"points": PackedFloat32Array(0, 0, 0, 0.116286084, 0, 0, -0.116286084, 0, 0.0003805856, 0, 0, -0.11666667, 0, 0, 0, 0.0052359877, -9.40462e-05, -0.0009848494, 0.049905956, 0.52261394, 6.2831855, -0.049836896, -0.52200276, 6.906192e-05, 0.00072336994, 6.2831855, -6.906192e-05, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.6977165, 0.7, 0.70056427, 0.9995856, 1)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MeshInstance3D:rotation:z")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(2, 2, 2, 2, 2, 2),
-"points": PackedFloat32Array(0, 0, 0, 0.116286084, 0, 0, -0.116286084, 0, 0.0003805856, 0, 0, -0.11666667, 0, 0, 0, 0, -9.40462e-05, 0, 0.049905956, 0, 0, -0.049836896, 0, 6.906192e-05, 0, 0, -6.906192e-05, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.6977165, 0.7, 0.70056427, 0.9995856, 1)
-}
-
-[sub_resource type="Animation" id="Animation_6jtmm"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:rotation:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(2, 2),
-"points": PackedFloat32Array(0, 0, 0, 0.16666667, 0.2617994, 0, -0.16666667, 0, 0, 0),
-"times": PackedFloat32Array(0, 1)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3D:rotation:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(2, 2),
-"points": PackedFloat32Array(0, 0, 0, 0.16666667, 1.0471976, 6.2831855, -0.16666667, -1.0471976, 0, 0),
-"times": PackedFloat32Array(0, 1)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MeshInstance3D:rotation:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(2, 2),
-"points": PackedFloat32Array(0, 0, 0, 0.16666667, 0, 0, -0.16666667, 0, 0, 0),
-"times": PackedFloat32Array(0, 1)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MeshInstance3D:position:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("MeshInstance3D:position:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MeshInstance3D:position:z")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_axmx8"]
-_data = {
-&"RESET": SubResource("Animation_axmx8"),
-&"activated": SubResource("Animation_1n3al"),
-&"idle": SubResource("Animation_6jtmm")
-}
+[sub_resource type="CylinderMesh" id="CylinderMesh_t724y"]
+height = 0.25
 
 [node name="collectible" type="Area3D" unique_id=24986374]
 collision_layer = 2048
@@ -234,15 +17,16 @@ script = ExtResource("1_g2c4f")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025512695, -0.0063476563, -0.0021362305)
 shape = SubResource("BoxShape3D_6jtmm")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=495400688]
+[node name="visual" type="Node3D" parent="." unique_id=1160455870]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="visual" unique_id=495400688]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 material_override = ExtResource("2_722df")
-mesh = SubResource("TextMesh_s1mjn")
+mesh = SubResource("CylinderMesh_t724y")
+skeleton = NodePath("../..")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=471502223]
-stream = ExtResource("3_q0plp")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=844818341]
-libraries/ = SubResource("AnimationLibrary_axmx8")
-autoplay = &"idle"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=570857558]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
