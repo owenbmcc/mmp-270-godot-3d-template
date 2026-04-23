@@ -32,12 +32,12 @@ func _on_body_entered(_body) -> void:
 	global.update_item(item_name)
 	emit_signal("item_collected", item_name)
 	
-	if $AudioStreamPlayer3D:
+	if has_node("AudioStreamPlayer3D"):
 		$AudioStreamPlayer3D.play()
-		if not $AnimationPlayer:
+		if not has_node("AnimationPlayer"):
 			await $AudioStreamPlayer3D.finished
 	
-	if $AnimationPlayer:
+	if has_node("AnimationPlayer"):
 		$AnimationPlayer.play("activated")
 		await $AnimationPlayer.animation_finished
 		$AnimationPlayer.play("idle")
