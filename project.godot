@@ -14,7 +14,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="MMP 271 Godot 3d template project"
+config/name="MMP 270 Godot 3d template project"
 run/main_scene="uid://s17k0gy5v185"
 config/features=PackedStringArray("4.6")
 config/icon="res://icon.png"
