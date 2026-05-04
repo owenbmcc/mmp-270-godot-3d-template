@@ -44,6 +44,9 @@ var is_patrolling : bool = true
 
 var animation_player : AnimationPlayer
 
+var has_attack_sound : bool = false
+var has_detect_sound : bool = false
+
 func _ready():
 	if patrol_locations.size() == 0:
 		is_patrolling = false
@@ -52,10 +55,21 @@ func _ready():
 		animation_player = character_node.find_child("AnimationPlayer")
 		if animation_player:
 			animation_player.play("walk")
+	
+	# assert to check audio setup
+	if has_node("attack_sound"):
+		has_attack_sound = true
+		assert($attack_sound.stream, "attack_sound require stream (audio file), remove node or add stream")
+	if has_node("detect_sound"):
+		has_detect_sound = true
+		assert($detect_sound.stream, "detect_sound require stream (audio file), remove node or add stream")
+		
 
 func set_patrol_location() -> void:
 	if not is_patrolling:
 		return
+	if not patrol_locations[patrol_index].is_inside_tree():
+		return # prevent error after killing player and resetting scene
 	var location = patrol_locations[patrol_index].global_position
 	nav_agent.set_target_position(location)
 
@@ -73,12 +87,13 @@ func _physics_process(_delta) -> void:
 		set_patrol_location()
 		return
 	
-	# enemy attacks player
+	# enemy follows player
 	if nav_agent.distance_to_target() < attack_distance and is_following_player:
 		if animation_player:
 			animation_player.play("follow")
-		if $attack_sound:
-			$attack_sound.play()
+		return
+	
+	if nav_agent.is_navigation_finished():
 		return
 	
 	var current_location = global_transform.origin
@@ -100,7 +115,7 @@ func _on_player_detector_body_entered(_body) -> void:
 	is_following_player = true
 	if animation_player:
 		animation_player.play("follow")
-	if $detect_sound:
+	if has_detect_sound:
 		$detect_sound.play()
 
 # player leaves detection area
@@ -119,5 +134,9 @@ func _on_hit_box_body_entered(_body):
 	queue_free()
 
 
-func _on_player_attack_body_entered(body: Node3D) -> void:
+func _on_player_attack_body_entered(player: CharacterBody3D) -> void:
+	player.is_dead = true
+	if has_attack_sound:
+		$attack_sound.play()
+		await $attack_sound.finished
 	call_deferred("emit_signal", "enemy_attack")

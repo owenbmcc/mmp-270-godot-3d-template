@@ -38,6 +38,7 @@ var grav_vel: Vector3 # Gravity velocity
 var jump_vel: Vector3 # Jumping velocity
 
 var is_talking : bool = false
+var is_dead : bool = false
 
 @onready var camera: Camera3D = $Camera3D
 @onready var footstep_timer = $footstep_timer
@@ -57,7 +58,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			capture_mouse()
 
 func _physics_process(delta: float) -> void:
-	if is_talking:
+	if is_talking or is_dead:
 		return
 	if mouse_captured: _handle_joypad_camera_rotation(delta)
 	velocity = _walk(delta) + _gravity(delta) + _jump(delta)
